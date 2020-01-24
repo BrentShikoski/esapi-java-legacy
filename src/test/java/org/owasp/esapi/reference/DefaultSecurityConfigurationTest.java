@@ -394,6 +394,14 @@ public class DefaultSecurityConfigurationTest {
 		secConf = this.createWithProperty(DefaultSecurityConfiguration.MAX_LOG_FILE_SIZE, String.valueOf(maxLogSize));
 		assertEquals(maxLogSize, secConf.getMaxLogFileSize());
 	}
+	
+	@Test
+    public void testGetStringProp() {
+        final String propertyName = "ESAPI_PropertyKey";
+        final String expected = "ESAPI_UnitTestPropertyValue";
+        DefaultSecurityConfiguration secConf = this.createWithProperty(propertyName, expected);
+        assertEquals(expected, secConf.getStringProp(propertyName));
+    }
 
     @Test
     public void testNoSuchPropFile(){

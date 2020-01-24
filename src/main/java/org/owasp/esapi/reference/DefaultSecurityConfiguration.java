@@ -257,9 +257,15 @@ public class DefaultSecurityConfiguration implements SecurityConfiguration {
      * @param properties
      */
     public DefaultSecurityConfiguration(Properties properties) {
-    	resourceFile = DEFAULT_RESOURCE_FILE;
-    	this.properties = properties; 
-    	this.setCipherXProperties();
+        resourceFile = DEFAULT_RESOURCE_FILE;
+        this.properties = properties;
+        try {
+            this.esapiPropertyManager = new EsapiPropertyManager();
+            this.setCipherXProperties();
+        } catch( IOException e ) {
+            logSpecial("Failed to load security configuration", e );
+            throw new ConfigurationException("Failed to load security configuration", e);
+        } 	    
     }
     
     /**
